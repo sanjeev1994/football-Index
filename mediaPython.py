@@ -24,12 +24,13 @@ for y in range(4):
             #print data
             items = data['items']
             for item in items:
-                data1 = requests.get("https://api-prod.footballindex.co.uk/buzzmedia/footballuk/"+item['id']+ "/20190811?page=1&per_page=2000").json()
+                print "https://api-prod.footballindex.co.uk/buzzmedia/footballuk/"+item['id']+ "/"+str(date)+"?page=1&per_page=2000"
+                data1 = requests.get("https://api-prod.footballindex.co.uk/buzzmedia/footballuk/"+item['id']+ "/"+str(date)+"?page=1&per_page=2000").json()
                 for value in data1['items']:
                     values = value['title']
                     fileName = fileName + 1
-                    file = open("/Users/sanjeev/Desktop/FootBallIndexProject/Headlines/%d.text" % fileName , "w")
-                    print "/Users/sanjeev/Desktop/FootBallIndexProject/Headlines/%d.text" % fileName
+                    file = open("/Users/sanjeev/Desktop/football-Index/Headlines/%d.text" % fileName , "w")
+                    print "/Users/sanjeev/Desktop/football-Index/Headlines/%d.text" % fileName
                     file.write(u''.join(values).encode('utf-8').strip())
                     file.close()
-                    time.sleep(1)
+                    time.sleep(0.1)

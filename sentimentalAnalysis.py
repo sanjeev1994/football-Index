@@ -14,7 +14,7 @@ headlines = set()
 
 for i in range(2325):
     j = i+1
-    file = open("/Users/sanjeev/Desktop/headlines/%d.text" % j , "r")
+    file = open("/Users/sanjeev/Desktop/football-Index/Headlines/%d.text" % j , "r")
     lines = file.readline()
     print j
     headlines.add(lines)
