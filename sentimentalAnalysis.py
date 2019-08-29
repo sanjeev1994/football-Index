@@ -12,15 +12,14 @@ from nltk.tokenize import word_tokenize, RegexpTokenizer
 
 headlines = set()
 
-for i in range(2325):
+for i in range(5614):
     j = i+1
     file = open("/Users/sanjeev/Desktop/football-Index/Headlines/%d.text" % j , "r")
     lines = file.readline()
     print j
     headlines.add(lines)
     display.clear_output()
-print(len(headlines))
-
+print len(headlines)
 sia = SIA()
 results = []
 
@@ -28,8 +27,9 @@ for line in headlines:
     pol_score = sia.polarity_scores(line)
     pol_score['headline'] = line
     results.append(pol_score)
+fixedIndex = len(results) - 1
+print results[fixedIndex]
 
-pprint(results[:3], width=100)
 
 df = pd.DataFrame.from_records(results)
 df['label'] = 0
@@ -40,9 +40,14 @@ df.head()
 df2 = df[['headline', 'label']]
 df2.to_csv('football_headlines_labels.csv', mode='a', encoding='utf-8', index=False)
 
-print(df.label.value_counts())
+#print(df.label.value_counts())
+#
+#print(df.label.value_counts(normalize=True) * 100)
 
-print(df.label.value_counts(normalize=True) * 100)
+
+checkScore = sia.polarity_scores("Tottenham 5-3 Chelsea: Two-goal Harry Kane inspires Spurs to victory in thriller at the Lane")
+print "decent score"
+print checkScore
 
 fig, ax = plt.subplots(figsize=(8, 8))
 
